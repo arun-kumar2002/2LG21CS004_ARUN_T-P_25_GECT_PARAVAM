@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Operations Table</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            text-align: center;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        div {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Arithmetic Operations</h2>
+    
+    <div>
+        <label for="txt1">Value 1</label>
+        <input type="text" id="txt1" placeholder="">
+    </div>
+    <div>
+        <label for="txt2">Value 2</label>
+        <input type="text" id="txt2" placeholder="">
+    </div>
+    <div>
+        <button onclick="processInputs()">Submit</button>
+    </div>
+
+    <div>
+        <h3>Table 1</h3>
+        <table>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>OP</th>
+                <th>EXP</th>
+                <th>Result</th>
+            </tr>
+            <tbody id="resultsTable1"></tbody>
+        </table>
+    </div>
+
+    <div>
+        <h3>Table 2</h3>
+        <table>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>OP</th>
+                <th>EXP</th>
+                <th>Result</th>
+            </tr>
+            <tbody id="resultsTable2"></tbody>
+        </table>
+    </div>
+
+    <script>
+        function processInputs() {
+            var val1 = document.getElementById('txt1').value.trim();
+            var val2 = document.getElementById('txt2').value.trim();
+            
+            var num1 = parseFloat(val1);
+            var num2 = parseFloat(val2);
+            var tableBody1 = document.getElementById('resultsTable1');
+            var tableBody2 = document.getElementById('resultsTable2');
+
+            tableBody1.innerHTML = ""; 
+            tableBody2.innerHTML = ""; 
+
+            if (!isNaN(num1) && !isNaN(num2)) {
+                var operations = [
+                    { op: '+', exp: `${num1} + ${num2}`, result: num1 + num2 },
+                    { op: '-', exp: `${num1} - ${num2}`, result: num1 - num2 },
+                    { op: '*', exp: `${num1} * ${num2}`, result: num1 * num2 },
+                    { op: '/', exp: `${num1} / ${num2}`, result: num2 !== 0 ? (num1 / num2).toFixed(2) : "Cannot divide by zero" },
+                    { op: '**', exp: `${num1} ** ${num2}`, result: num1 ** num2 },
+                    { op: '%', exp: `${num1} % ${num2}`, result: num1 % num2 },
+                    { op: '++X', exp: `++${num1}`, result: num1 + 1 },  
+                    { op: '--Y', exp: `--${num2}`, result: num2 - 1 }  
+                ];
+
+                operations.forEach(op => {
+                    var row = `<tr>
+                        <td>${num1}</td>
+                        <td>${num2}</td>
+                        <td>${op.op}</td>
+                        <td>${op.exp}</td>
+                        <td>${op.result}</td>
+                    </tr>`;
+                    tableBody1.innerHTML += row;
+                    tableBody2.innerHTML += row; // Adds to second table
+                });
+            } else {
+                alert("Please enter valid numbers.");
+            }
+        }
+    </script>
+</body>
+</html>

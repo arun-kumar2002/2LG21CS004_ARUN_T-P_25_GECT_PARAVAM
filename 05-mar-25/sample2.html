@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowchart Logic</title>
+    <script>
+        function generateTable() {
+            let x = document.getElementById("xValue").value;
+            let y = document.getElementById("yValue").value;
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+
+            // Check if values are numbers
+            if (isNaN(x) || isNaN(y) || x === "" || y === "") {
+                resultDiv.innerHTML = "<h3>String Operations Table</h3>";
+                let strTable = "<table border='1'><tr><th>Operation</th><th>Result</th></tr>";
+                strTable += `<tr><td>Reverse (${x})</td><td>${x.split('').reverse().join('')}</td></tr>`;
+                strTable += `<tr><td>Length (${x})</td><td>${x.length}</td></tr>`;
+                strTable += `<tr><td>Concatenation (${x} + ${y})</td><td>${x + y}</td></tr>`;
+                strTable += "</table>";
+                resultDiv.innerHTML += strTable;
+                return;
+            }
+
+            x = parseInt(x);
+            y = parseInt(y);
+
+            // Check if values are less than 10
+            if (x < 10 && y < 10) {
+                resultDiv.innerHTML = "<h3>Algebraic Formulas Table</h3>";
+                let algebraTable = "<table border='1'><tr><th>Formula</th><th>Result</th></tr>";
+                algebraTable += `<tr><td>x² + y²</td><td>${(x * x) + (y * y)}</td></tr>`;
+                algebraTable += `<tr><td>2xy</td><td>${2 * x * y}</td></tr>`;
+                algebraTable += `<tr><td>(x + y)²</td><td>${Math.pow((x + y), 2)}</td></tr>`;
+                algebraTable += "</table>";
+                resultDiv.innerHTML += algebraTable;
+            } else {
+                resultDiv.innerHTML = "<h3>Arithmetic Operations Table</h3>";
+                let arithTable = "<table border='1'><tr><th>Operation</th><th>Result</th></tr>";
+                arithTable += `<tr><td>x + y</td><td>${x + y}</td></tr>`;
+                arithTable += `<tr><td>x - y</td><td>${x - y}</td></tr>`;
+                arithTable += `<tr><td>x * y</td><td>${x * y}</td></tr>`;
+                arithTable += `<tr><td>x / y</td><td>${y !== 0 ? (x / y).toFixed(2) : "Undefined"}</td></tr>`;
+                arithTable += "</table>";
+                resultDiv.innerHTML += arithTable;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Flowchart Logic Implementation</h2>
+    <label for="xValue">Enter X value: </label>
+    <input type="text" id="xValue">
+    <br><br>
+    <label for="yValue">Enter Y value: </label>
+    <input type="text" id="yValue">
+    <br><br>
+    <button onclick="generateTable()">Generate Table</button>
+    <br><br>
+    <div id="result"></div>
+</body>
+</html>
